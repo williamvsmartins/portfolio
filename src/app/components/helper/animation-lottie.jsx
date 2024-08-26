@@ -1,20 +1,16 @@
 "use client";
 
-import Lottie from "lottie-react";
+import dynamic from "next/dynamic";
 
-const AnimationLottie = ({ animationPath, width }) => {
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: animationPath,
-    style: {
-      width: '95%',
-    }
-  };
+const AnimationLottieComponent = dynamic(() => import("lottie-react"), { ssr: false });
 
+export default function AnimationLottie({ animationPath, width = "95%" }) {
   return (
-    <Lottie {...defaultOptions} />
+    <AnimationLottieComponent
+      animationData={animationPath}
+      loop={true}
+      autoplay={true}
+      style={{ width }}
+    />
   );
-};
-
-export default AnimationLottie;
+}
